@@ -1,5 +1,6 @@
 from config import *
 import IO
+import func
 
 class Board:
     def __init__(self, board=[], player=WHITE, turn=1, s=''):
@@ -39,6 +40,16 @@ class Board:
                 print(' {} |'.format(IO.RetType(self.board[hori][vert])),end='')
             print('\t')           
             print('\t  - - - - - - - - - - - - - - -')
-board=[a]
-a = Board(board)
-a.print(True,True)
+
+
+    def moveJudge(self, frHori,frVert,toHori,toVert):
+        if not(func.inSize(frHori) and func.inSize(frVert) and func.inSize(toHori) and func.inSize(toVert)):
+            return False
+        player = func.posNeg(self.board[frHori][frVert])
+        peice = abs(self.board[frHori][frVert])
+        if func.posNeg(self.board[toHori][toVert]):
+            return False
+        if peice == EMPTY:
+            return False
+
+

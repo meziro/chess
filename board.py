@@ -24,14 +24,21 @@ class Board:
         start = [SIZE - 1, 0]
         stop =[-1, SIZE]
         step = [-1, +1]
-        print('\t  a   b   c   d   e   f   g   h')
+        switch = bool(turnmode and(self.player == BLACK))
+        if reverse:
+            switch = not switch
+        if switch:
+            print('\t  h   g   f   e   d   c   b   a')
+        else: 
+            print('\t  a   b   c   d   e   f   g   h')
+
         print('\t  - - - - - - - - - - - - - - -')
-        for hori in range(SIZE):
+        for hori in range(start[switch],stop[switch],step[switch]):
             print('\t{}'.format(hori+1),end='')
-            for vert in range(SIZE):
+            for vert in range(start[not switch],stop[not switch],step[not switch]):
                 print(' {} |'.format(IO.RetType(self.board[hori][vert])),end='')
             print('\t')           
             print('\t  - - - - - - - - - - - - - - -')
 board=[a]
-a = Board(board,True,True)
-a.print()
+a = Board(board)
+a.print(True,True)
